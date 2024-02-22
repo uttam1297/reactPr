@@ -1,11 +1,9 @@
-import React from 'react'
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import authService from '../appwrite/auth'
 import { Link, useNavigate } from 'react-router-dom'
 import { login } from '../store/authSlice'
 import { Button, Input, Logo } from "./index"
-import { UseDispatch, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useForm } from "react-hook-form"
 
 
@@ -15,7 +13,7 @@ function SignUp() {
     const navigate = useNavigate()
     const [error, setError] = useState("")
     const dispatch = useDispatch()
-    const [register, handleSubmit] = useForm()
+    const { register, handleSubmit } = useForm()
 
     const create = async (data) => {
         setError("")
@@ -54,30 +52,30 @@ function SignUp() {
                         <Input
                             label="Full Name:"
                             placeholder="Enter your full name"
-                            {...register("name"), {
+                            {...register("name", {
                                 required: true
-                            }}
+                            })}
 
                         />
                         <Input
                             label="Email:"
                             placeholder="Enter your email"
                             type="email"
-                            {...register("email"), {
+                            {...register("email", {
                                 required: true,
                                 validate: {
                                     matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
                                         "Email address must be a valid address",
                                 }
-                            }}
+                            })}
                         />
                         <Input
                             label="Password"
                             placeholder="Enter your pawword"
                             type="password"
-                            {...register("password"), {
+                            {...register("password", {
                                 required: true
-                            }}
+                            })}
                         />
                         <Button type='submit' className='w-full'>Create Account</Button>
                     </div>
